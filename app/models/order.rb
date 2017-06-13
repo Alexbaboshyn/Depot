@@ -8,6 +8,7 @@ class Order < ApplicationRecord
   }
 
   validates :name, :address, :email, presence: true
+  validates :email, uniqueness: { case_sensitive: false }, email: true
   validates :pay_type, inclusion: pay_types.keys
 
   def add_line_items_from_cart(cart)

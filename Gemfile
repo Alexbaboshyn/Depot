@@ -32,6 +32,10 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 gem 'rails-observers', github: 'rails/rails-observers'
 
+gem 'sidekiq'
+
+gem 'email_validator'
+
 
 
 group :development, :test do

@@ -1,9 +1,11 @@
 class LineItemsController < ApplicationController
 
-  skip_before_action :authorize, only: :create
+  skip_before_action :authorize, only: [:create, :decrement]
 
   include CurrentCart
+  include SessionCounter
 
+  before_action :reset_to_zero, only: [:create]
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
@@ -56,6 +58,20 @@ class LineItemsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def decrement
+    @decrementing_item = LineItem.find_by_id(params[:id])
+    if @decrementing_item.quantity > 1
+      @decrementing_item.decrement!(:quantity, 1)
+    else
+      @decrementing_item.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to store_index_path }
+      format.js{}
+      format.json { head :ok }
     end
   end
 

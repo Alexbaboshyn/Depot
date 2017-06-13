@@ -18,6 +18,7 @@ class OrderMailer < ApplicationMailer
   #
   def shipped(order)
     @order = order
+    @time = (l Time.now, :format => :short)
 
     mail to: order.email, subject: 'Pragmatic Store Order Shipped'
   end
