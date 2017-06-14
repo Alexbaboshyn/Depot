@@ -34,6 +34,8 @@ class LineItemsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
     @line_item = @cart.add_product(product)
+    # product.decrement!(:quantity, 1)
+
 
     respond_to do |format|
       if @line_item.save
@@ -68,6 +70,7 @@ class LineItemsController < ApplicationController
     else
       @decrementing_item.destroy
     end
+    @decrementing_item.product.increment!(:quantity, 1)
     respond_to do |format|
       format.html { redirect_to store_index_path }
       format.js{}

@@ -37,10 +37,16 @@
 
       form, div {
         display: inline;
-      }   
+      }
     }
 
     .price {
+      color: #44a;
+      font-weight: bold;
+      margin-right: 3em;
+    }
+
+    .quantity {
       color: #44a;
       font-weight: bold;
       margin-right: 3em;

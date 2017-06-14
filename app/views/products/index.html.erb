@@ -15,6 +15,7 @@
         <dt><%= product.title %></dt>
         <dd><%= truncate(strip_tags(product.description),
                length: 100) %></dd>
+        <span class="quantity">Quantity:<%=product.quantity %></span>
       </dl>
     </td>
 
